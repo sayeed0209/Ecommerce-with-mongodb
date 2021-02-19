@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 	const { id } = req.params;
 	const product = await Product.findByIdAndDelete(id);
-	req.flash('success', 'Deleted Succussfully');
+	req.flash('success', 'Deleted Succussfully ');
 	res.redirect('/products');
 });
 module.exports = router;
