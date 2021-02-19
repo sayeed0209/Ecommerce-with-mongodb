@@ -1,0 +1,60 @@
+<%-layout('layouts/boilerplate') %>
+<form action="/products/<%=product._id%>?_method=PUT" novalidate class="needs-validation" method="POST">
+	<div class="row offset-3">
+		<div class="col-8">
+			<div>
+				<label for="title" class="form-label">Title</label>
+				<input
+					type="text"
+					name="title"
+					id="title"
+					class="form-control"
+					required
+					value="<%=product.title%>"
+				/>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<div>
+				<label for="image" class="form-label">Image</label>
+				<input
+					type="text"
+					name="image"
+					id="image"
+					class="form-control"
+					required
+					value="<%=product.image%>"
+				/>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<div>
+				<label for="image" class="form-label">Price</label>
+				<div class="input-group mb-3">
+					<span class="input-group-text">$</span>
+					<input
+						type="text"
+						class="form-control"
+						aria-label="Amount (to the nearest dollar)"
+						name="price"
+						required
+						value="<%=product.price%>"
+					/>
+					<div class="valid-feedback">Looks good!</div>
+				</div>
+			</div>
+
+			<div>
+				<label for="description" class="form-label">Description</label>
+				<textarea
+					name="description"
+					id="description"
+					class="form-control"
+					required
+				>
+<%=product.title%></textarea
+				>
+				<div class="valid-feedback">Looks good!</div>
+			</div>
+			<button class="btn btn-success mt-3">Update product</button>
+		</div>
+	</div>
+</form>

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const User = require('./models/user');
 const app = express();
 const path = require('path');
 const flash = require('connect-flash');
@@ -19,6 +20,7 @@ const sessionConfig = {
 	},
 };
 const userRoutes = require('./routes/userRoutes');
+const productsRoutes = require('./routes/productsRoutes');
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +30,12 @@ app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sessionConfig));
 app.use(flash());
+// passsport session
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 // mongoose connection
 mongoose.connect('mongodb://localhost:27017/pasportAuth', {
 	useNewUrlParser: true,
@@ -45,9 +53,10 @@ app.use((req, res, next) => {
 	res.locals.error = req.flash('error');
 	next();
 });
+app.use('/products', productsRoutes);
 app.use('/', userRoutes);
 app.get('/', (req, res) => {
-	res.send('Welcome');
+	res.render('home/home');
 });
 
 app.listen(3000, () => {
