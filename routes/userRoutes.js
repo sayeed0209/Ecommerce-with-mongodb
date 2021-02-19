@@ -8,15 +8,15 @@ router.get('/register', (req, res) => {
 	res.render('users/register');
 });
 
-router.post('/register', async (req, res) => {
-	try {
-		const { username, email, password } = req.body;
-		const newuser = await new User({ username, email });
-		const registerUser = await User.register(newuser, password);
-		console.log(registerUser);
-        res.redirect()
-	} catch (err) {
-		console.log(err.message);
-	}
-});
+// router.post('/register', async (req, res) => {
+// 	try {
+// 		const { username, email, password } = req.body;
+// 		const newuser = await new User({ username, email });
+// 		const registerUser = await User.register(newuser, password);
+// 		console.log(registerUser);
+//         res.redirect()
+// 	} catch (err) {
+// 		console.log(err.message);
+// 	}
+// });
 module.exports = router;

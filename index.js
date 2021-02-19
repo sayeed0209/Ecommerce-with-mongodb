@@ -22,6 +22,7 @@ const userRoutes = require('./routes/userRoutes');
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+// app.use(express.static('public'));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
@@ -41,6 +42,7 @@ DB.once('open', () => {
 });
 app.use((req, res, next) => {
 	res.locals.success = req.flash('success');
+	res.locals.error = req.flash('error');
 	next();
 });
 app.use('/', userRoutes);
